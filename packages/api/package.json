@@ -1,0 +1,28 @@
+{
+  "name": "@portfolio/api",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@portfolio/config": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@trpc/server": "catalog:",
+    "@trpc/client": "catalog:",
+    "next": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:",
+    "@portfolio/auth": "workspace:*",
+    "@portfolio/db": "workspace:*"
+  }
+}

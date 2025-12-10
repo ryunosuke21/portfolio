@@ -1,0 +1,25 @@
+{
+  "name": "@portfolio/auth",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@portfolio/config": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@portfolio/env": "workspace:*",
+    "@portfolio/db": "workspace:*",
+    "better-auth": "catalog:",
+    "zod": "catalog:"
+  }
+}

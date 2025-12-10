@@ -1,0 +1,22 @@
+{
+  "name": "@portfolio/env",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": {
+      "default": "./src/server.ts"
+    },
+    "./client": {
+      "default": "./src/client.ts"
+    }
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.8",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@portfolio/config": "workspace:*"
+  }
+}
