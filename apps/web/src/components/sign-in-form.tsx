@@ -2,11 +2,14 @@ import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod";
-import { authClient } from "@/lib/auth-client";
-import Loader from "./loader";
+
 import { Button } from "@portfolio/ui/components/button";
 import { Input } from "@portfolio/ui/components/input";
 import { Label } from "@portfolio/ui/components/label";
+
+import { authClient } from "@/lib/auth-client";
+
+import Loader from "./loader";
 
 export default function SignInForm({
   onSwitchToSignUp,
