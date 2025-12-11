@@ -4,9 +4,9 @@ import { toast } from "sonner";
 import z from "zod";
 import { authClient } from "@/lib/auth-client";
 import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@portfolio/ui/components/button";
+import { Input } from "@portfolio/ui/components/input";
+import { Label } from "@portfolio/ui/components/label";
 
 export default function SignUpForm({
   onSwitchToSignIn,

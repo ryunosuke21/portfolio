@@ -7,10 +7,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@portfolio/ui/components/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
+import { Button } from "@portfolio/ui/components/button";
+import { Skeleton } from "@portfolio/ui/components/skeleton";
 
 export default function UserMenu() {
   const router = useRouter();
