@@ -11,10 +11,8 @@
   "type": "module",
   "scripts": {},
   "devDependencies": {
-    "@portfolio/config": "workspace:*"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "@portfolio/config": "workspace:*",
+    "typescript": "catalog:"
   },
   "dependencies": {
     "@trpc/server": "catalog:",

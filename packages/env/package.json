@@ -17,6 +17,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@portfolio/config": "workspace:*"
+    "@portfolio/config": "workspace:*",
+    "typescript": "catalog:"
   }
 }

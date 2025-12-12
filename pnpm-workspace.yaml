@@ -3,9 +3,23 @@ packages:
   - packages/*
 
 catalog:
+  '@tailwindcss/postcss': ^4.1.18
   '@trpc/client': ^11.7.2
   '@trpc/server': ^11.7.2
+  '@types/react': ^19.2.7
+  '@types/react-dom': ^19.2.3
   better-auth: ^1.4.6
+  date-fns: ^4.1.0
   dotenv: ^17.2.3
-  next: ^16.0.8
+  lucide-react: ^0.560.0
+  next: ^16.0.10
+  postcss: ^8.5.1
+  postcss-load-config: ^6.0.1
+  react: ^19.2.3
+  react-dom: ^19.2.3
+  react-hook-form: ^7.68.0
+  recharts: ^3.5.1
+  sonner: ^2.0.7
+  tailwindcss: ^4.1.18
+  typescript: ^5.9.3
   zod: ^4.1.13

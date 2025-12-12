@@ -20,13 +20,13 @@
     "db:migrate": "turbo -F @portfolio/db db:migrate"
   },
   "dependencies": {
-    "dotenv": "^17.2.2",
-    "zod": "^4.1.13"
+    "dotenv": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "turbo": "^2.5.4",
-    "@biomejs/biome": "^2.2.0",
-    "@types/node": "^22.13.11"
+    "@biomejs/biome": "^2.3.8",
+    "@types/node": "^25.0.1",
+    "turbo": "^2.6.3"
   },
   "packageManager": "pnpm@10.14.0"
 }
