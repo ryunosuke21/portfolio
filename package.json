@@ -14,10 +14,10 @@
     "check-types": "turbo check-types",
     "dev:native": "turbo -F native dev",
     "dev:web": "turbo -F web dev",
-    "db:push": "turbo -F @portfolio/db db:push",
-    "db:studio": "turbo -F @portfolio/db db:studio",
-    "db:generate": "turbo -F @portfolio/db db:generate",
-    "db:migrate": "turbo -F @portfolio/db db:migrate"
+    "db:push": "turbo -F web db:push",
+    "db:studio": "turbo -F web db:studio",
+    "db:generate": "turbo -F web db:generate",
+    "db:migrate": "turbo -F web db:migrate"
   },
   "dependencies": {
     "dotenv": "catalog:",

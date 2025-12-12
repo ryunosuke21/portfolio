@@ -21,12 +21,13 @@
     "drizzle-kit": "^0.31.8",
     "typescript": "catalog:"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@neondatabase/serverless": "^1.0.2",
-    "@portfolio/env": "workspace:*",
+    "@portfolio/env": "workspace:*"
+  },
+  "dependencies": {
     "dotenv": "catalog:",
     "drizzle-orm": "^0.45.1",
-    "pg": "^8.16.3",
     "zod": "catalog:"
   }
 }

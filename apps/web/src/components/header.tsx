@@ -1,48 +1,59 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@portfolio/ui/components/avatar";
+import { Button } from "@portfolio/ui/components/button";
+
+import { UserMenu } from "@/components/user-menu";
 
 export function Header() {
   return (
     <header className="fixed top-0 right-0 left-0 z-50 border-border/50 border-b bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
-        <div className="font-bold text-2xl text-primary">DEV</div>
+        <div className="font-bold text-2xl text-primary">
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              width={60}
+              height={33}
+              className="hover:opacity-80"
+            />
+          </Link>
+        </div>
 
         <nav className="hidden items-center gap-8 md:flex">
-          <a
+          <Link
             href="#home"
             className="text-foreground transition-colors hover:text-primary"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="#projects"
             className="text-foreground transition-colors hover:text-primary"
           >
             Projects
-          </a>
-          <a
+          </Link>
+          <Link
             href="#about"
             className="text-foreground transition-colors hover:text-primary"
           >
             About
-          </a>
-          <a
+          </Link>
+          <Link
             href="#contact"
             className="text-foreground transition-colors hover:text-primary"
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
-        <Avatar>
-          <AvatarImage src="/developer-avatar.png" />
-          <AvatarFallback className="bg-primary text-primary-foreground">
-            A
-          </AvatarFallback>
-        </Avatar>
+        <UserMenu />
       </div>
     </header>
   );

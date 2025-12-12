@@ -3,10 +3,10 @@ import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
 import { admin, twoFactor } from "better-auth/plugins";
 
-import * as schema from "@portfolio/db/schema/auth";
+import { env } from "@/env/server";
+import { db } from "@/server/db";
+import * as schema from "@/server/db/schema";
 
-import { db } from "@portfolio/db";
-import { env } from "@portfolio/env/server";
 import { access, admin as adminRole, user } from "./access";
 
 export const auth = betterAuth({
@@ -51,3 +51,5 @@ export const auth = betterAuth({
     }),
   ],
 });
+
+export type Auth = typeof auth;
