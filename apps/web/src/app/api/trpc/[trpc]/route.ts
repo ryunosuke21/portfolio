@@ -1,7 +1,8 @@
-import { createContext } from "@portfolio/api/context";
-import { appRouter } from "@portfolio/api/routers/index";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import type { NextRequest } from "next/server";
+
+import { createContext } from "@portfolio/api/context";
+import { appRouter } from "@portfolio/api/routers/index";
 
 function handler(req: NextRequest) {
   return fetchRequestHandler({
