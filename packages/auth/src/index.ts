@@ -1,12 +1,13 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
-import { twoFactor } from "better-auth/plugins";
+import { admin, twoFactor } from "better-auth/plugins";
 
 import * as schema from "@portfolio/db/schema/auth";
 
 import { db } from "@portfolio/db";
 import { env } from "@portfolio/env/server";
+import { access, admin as adminRole, user } from "./access";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -23,6 +24,18 @@ export const auth = betterAuth({
   },
   plugins: [
     nextCookies(),
+    admin({
+      ac: access,
+      roles: {
+        admin: adminRole,
+        user,
+      },
+      adminRoles: ["admin"],
+      allowImpersonatingAdmins: false,
+      bannedUserMessage: "You are banned from the admin panel",
+      defaultRole: "user",
+      defaultBanReason: "You are banned from the admin panel",
+    }),
     twoFactor({
       totpOptions: {
         backupCodes: {
