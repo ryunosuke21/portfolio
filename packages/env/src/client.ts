@@ -2,7 +2,7 @@ import { createEnv } from "@t3-oss/env-core";
 import { config } from "dotenv";
 import { z } from "zod";
 
-config({ path: "../../apps/web/.env" });
+config({ path: ["../../apps/web/.env"] });
 
 export const env = createEnv({
   client: {
