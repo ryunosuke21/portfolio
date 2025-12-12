@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@portfolio/ui/components/avatar";
-import { Button } from "@portfolio/ui/components/button";
-
 import { UserMenu } from "@/components/user-menu";
 
 export function Header() {
@@ -44,6 +37,12 @@ export function Header() {
             className="text-foreground transition-colors hover:text-primary"
           >
             About
+          </Link>
+          <Link
+            href="#experience"
+            className="text-foreground transition-colors hover:text-primary"
+          >
+            Experience
           </Link>
           <Link
             href="#contact"
