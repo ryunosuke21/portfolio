@@ -1,4 +1,11 @@
-import type { auth } from "@portfolio/auth";
+import {
+  inferAdditionalFields,
+  twoFactorClient,
+} from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient({});
+import type { auth } from "@portfolio/auth";
+
+export const authClient = createAuthClient({
+  plugins: [inferAdditionalFields<typeof auth>(), twoFactorClient()],
+});
