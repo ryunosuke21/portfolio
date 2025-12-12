@@ -6,6 +6,7 @@ config({ path: "../../apps/web/.env" });
 
 export const env = createEnv({
   server: {
+    NODE_ENV: z.enum(["development", "production"]).default("development"),
     BASE_URL: z.string().default("http://localhost:3000"),
     BETTER_AUTH_SECRET: z.string(),
     DATABASE_URL: z.string(),

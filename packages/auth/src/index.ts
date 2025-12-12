@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { twoFactor } from "better-auth/plugins";
 
 import * as schema from "@portfolio/db/schema/auth";
 
@@ -10,7 +11,8 @@ import { env } from "@portfolio/env/server";
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
-
+    usePlural: true,
+    camelCase: false,
     schema: schema,
   }),
   trustedOrigins: [env.BASE_URL],
@@ -19,5 +21,20 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [nextCookies()],
+  plugins: [
+    nextCookies(),
+    twoFactor({
+      totpOptions: {
+        backupCodes: {
+          amount: 10,
+          length: 16,
+          storeBackupCodes:
+            env.NODE_ENV === "production" ? "encrypted" : "plain",
+        },
+        digits: 6,
+        period: 32,
+      },
+      issuer: "Personal Portfolio",
+    }),
+  ],
 });
