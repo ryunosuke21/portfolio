@@ -5,6 +5,12 @@
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "dist",
-    "composite": true
-  }
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@portfolio/api/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
