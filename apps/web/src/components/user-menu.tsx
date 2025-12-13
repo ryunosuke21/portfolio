@@ -27,7 +27,7 @@ export function UserMenu() {
   if (error) {
     return (
       <Button variant="outline" asChild>
-        <Link href="/login">Login</Link>
+        <Link href="/sign-in">Login</Link>
       </Button>
     );
   }

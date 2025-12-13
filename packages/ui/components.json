@@ -10,6 +10,7 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@portfolio/ui/components",
     "utils": "@portfolio/ui/lib/utils",
@@ -17,5 +18,7 @@
     "lib": "@portfolio/ui/lib",
     "hooks": "@portfolio/ui/hooks"
   },
-  "iconLibrary": "lucide"
+  "registries": {
+    "@wds": "https://wds-shadcn-registry.netlify.app/r/{name}.json"
+  }
 }
