@@ -80,6 +80,8 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
                     id="email"
                     placeholder="j.doe@example.com"
                     type="email"
+                    aria-invalid={fieldState.invalid}
+                    autoComplete="email"
                     {...field}
                   />
                 </FieldContent>
@@ -98,6 +100,7 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
                     id="password"
                     autoComplete="current-password"
                     placeholder="At least 8 characters"
+                    aria-invalid={fieldState.invalid}
                     {...field}
                   />
                 </FieldContent>
