@@ -1,15 +1,18 @@
-import { cn } from "@portfolio/ui/lib/utils"
-import { Loader2Icon } from "lucide-react"
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
+import { Loader2Icon } from "lucide-react";
+
+import { cn } from "@portfolio/ui/lib/utils";
 
 export function LoadingSwap({
   isLoading,
   children,
   className,
+  loadingText,
 }: {
-  isLoading: boolean
-  children: ReactNode
-  className?: string
+  isLoading: boolean;
+  children: ReactNode;
+  className?: string;
+  loadingText?: string;
 }) {
   return (
     <div className="grid grid-cols-1 items-center justify-items-center">
@@ -30,7 +33,8 @@ export function LoadingSwap({
         )}
       >
         <Loader2Icon className="animate-spin" />
+        {loadingText && <span>{loadingText}</span>}
       </div>
     </div>
-  )
+  );
 }

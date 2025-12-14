@@ -50,7 +50,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export function LoginCard({ className, ...props }: LoginFormProps) {
+export function SignInForm({ className, ...props }: LoginFormProps) {
   const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -66,6 +66,7 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
     await signIn.email(
       {
         ...data,
+        callbackURL: "/dashboard",
       },
       {
         onError: (ctx) => {
@@ -93,7 +94,7 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Welcome back</CardTitle>
         <CardDescription>
-          Enter your email and password to access your account.
+          Enter your credentials to access your account.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
@@ -106,6 +107,12 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
             </AlertDescription>
           </Alert>
         )}
+        <GithubLogin className="w-full" />
+        <div className="flex items-center justify-between">
+          <Separator className="flex-1" />
+          <span>or</span>
+          <Separator className="flex-1" />
+        </div>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           id="sign-in"
@@ -184,12 +191,6 @@ export function LoginCard({ className, ...props }: LoginFormProps) {
             </LoadingSwap>
           </Button>
         </form>
-        <div className="flex items-center justify-between">
-          <Separator className="flex-1" />
-          <span>or</span>
-          <Separator className="flex-1" />
-        </div>
-        <GithubLogin className="w-full" />
         <div className="text-center text-sm">
           <p className="text-muted-foreground">
             Don&apos;t have an account?{" "}
