@@ -1,19 +1,19 @@
-import { AnimatedBackground } from "@/components/animated-background";
-import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
+import { ContactSection } from "@/components/contact-section";
+import { ExperienceSection } from "@/components/experience-section";
+import { Footer } from "@/components/footer";
+import { Hero } from "@/components/hero";
+import { Navbar } from "@/components/navbar";
 import { ProjectsSection } from "@/components/projects-section";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-background">
-      <AnimatedBackground />
-      <div className="relative z-10">
-        <Header />
-        <main>
-          <HeroSection />
-          <ProjectsSection />
-        </main>
-      </div>
-    </div>
+    <main className="min-h-screen">
+      <Navbar />
+      <Hero />
+      <ProjectsSection />
+      <ExperienceSection />
+      <ContactSection />
+      <Footer />
+    </main>
   );
 }
