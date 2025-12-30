@@ -1,0 +1,56 @@
+{
+  "name": "auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config ./src/server/auth/index.ts --output ./src/server/db/schema/auth.ts --yes",
+    "build": "next build",
+    "check": "biome check .",
+    "check:unsafe": "biome check --write --unsafe .",
+    "check:write": "biome check --write .",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "dev": "next dev --turbo",
+    "preview": "next build && next start",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@auth/drizzle-adapter": "^1.11.1",
+    "@better-auth/oauth-provider": "^1.4.9",
+    "@portfolio/ui": "workspace:*",
+    "@t3-oss/env-nextjs": "^0.13.10",
+    "@tanstack/react-query": "^5.90.14",
+    "@trpc/client": "catalog:",
+    "@trpc/react-query": "catalog:",
+    "@trpc/server": "catalog:",
+    "better-auth": "catalog:",
+    "drizzle-orm": "^0.45.1",
+    "lucide-react": "catalog:",
+    "next": "catalog:",
+    "next-themes": "^0.4.6",
+    "postgres": "^3.4.7",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "server-only": "^0.0.1",
+    "superjson": "^2.2.6",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.10",
+    "@tailwindcss/postcss": "catalog:",
+    "@types/node": "^25.0.3",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "drizzle-kit": "^0.31.8",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.40.0"
+  }
+}
