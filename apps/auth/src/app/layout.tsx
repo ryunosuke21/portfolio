@@ -1,6 +1,7 @@
 import "@portfolio/ui/globals.css";
 
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Roboto } from "next/font/google";
 
 import { APP_DESCRIPTION, APP_NAME } from "@/constants";
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${roboto.variable}`}>
       <body>
+        <Analytics />
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

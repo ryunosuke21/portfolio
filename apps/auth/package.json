@@ -27,6 +27,7 @@
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
+    "@vercel/analytics": "^1.6.1",
     "better-auth": "catalog:",
     "drizzle-orm": "^0.45.1",
     "lucide-react": "catalog:",
