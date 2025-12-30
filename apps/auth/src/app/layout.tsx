@@ -1,11 +1,10 @@
 import "@portfolio/ui/globals.css";
 
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { Roboto } from "next/font/google";
 
+import { Providers } from "@/components/providers";
 import { APP_DESCRIPTION, APP_NAME } from "@/constants";
-import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
   title: {
@@ -30,10 +29,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${roboto.variable}`}>
+    <html lang="en" className={`${roboto.variable}`} suppressHydrationWarning>
       <body>
-        <Analytics />
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

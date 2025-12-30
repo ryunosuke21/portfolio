@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { GithubIcon } from "lucide-react";
+import { GitHubDark, GitHubLight } from "@ridemountainpig/svgl-react";
+import { useTheme } from "next-themes";
 import { toast } from "sonner";
 
 import { Button } from "@portfolio/ui/components/button";
+import { LoadingSwap } from "@portfolio/ui/components/loading-swap";
 import { cn } from "@portfolio/ui/lib/utils";
 
 import { signIn } from "@/hooks/auth";
@@ -17,6 +19,7 @@ export function GithubLogin({
   ...props
 }: GithubLoginProps) {
   const [loading, setLoading] = React.useState(false);
+  const { resolvedTheme } = useTheme();
 
   async function loginWithGithub() {
     setLoading(true);
@@ -46,8 +49,10 @@ export function GithubLogin({
       onClick={handleGithubLogin}
       {...props}
     >
-      <GithubIcon className="size-4" />
-      Continue with Github
+      <LoadingSwap isLoading={loading} className="flex items-center gap-2">
+        {resolvedTheme === "dark" ? <GitHubLight /> : <GitHubDark />}
+        Continue with Github
+      </LoadingSwap>
     </Button>
   );
 }

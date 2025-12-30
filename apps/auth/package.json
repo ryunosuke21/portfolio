@@ -21,7 +21,9 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
     "@better-auth/oauth-provider": "^1.4.9",
+    "@hookform/resolvers": "^5.2.2",
     "@portfolio/ui": "workspace:*",
+    "@ridemountainpig/svgl-react": "^1.0.14",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@tanstack/react-query": "^5.90.14",
     "@trpc/client": "catalog:",
@@ -36,7 +38,9 @@
     "postgres": "^3.4.7",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
     "server-only": "^0.0.1",
+    "sonner": "catalog:",
     "superjson": "^2.2.6",
     "zod": "catalog:"
   },

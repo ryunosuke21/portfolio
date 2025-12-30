@@ -1,5 +1,5 @@
-import { AccountSelection } from "@/components/account-select";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <AccountSelection />;
+  redirect("/account");
 }
