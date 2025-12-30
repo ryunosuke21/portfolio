@@ -10,15 +10,27 @@ import {
   twoFactor,
 } from "better-auth/plugins";
 
+import { MAX_SESSIONS } from "@/constants";
 import { env } from "@/env/server";
+import { ac, admin as adminRole, user as userRole } from "@/server/auth/access";
 import { db } from "@/server/db";
 
 export const auth = betterAuth({
+  baseURL: env.VERCEL_URL ?? "http://localhost:3000",
   database: drizzleAdapter(db, {
     provider: "pg",
     camelCase: false,
     usePlural: true,
   }),
+  user: {
+    additionalFields: {
+      phoneNumber: {
+        type: "string",
+        required: false,
+        returned: true,
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
@@ -42,9 +54,21 @@ export const auth = betterAuth({
   plugins: [
     nextCookies(),
     twoFactor(),
-    admin(),
-    multiSession(),
-    lastLoginMethod(),
+    admin({
+      ac,
+      roles: {
+        admin: adminRole,
+        user: userRole,
+      },
+      adminRoles: ["admin"],
+      defaultRole: "user",
+    }),
+    multiSession({
+      maximumSessions: MAX_SESSIONS,
+    }),
+    lastLoginMethod({
+      storeInDatabase: true,
+    }),
     jwt(),
     oauthProvider({
       loginPage: "/sign-in",
@@ -53,7 +77,7 @@ export const auth = betterAuth({
         page: "/sign-up",
       },
       selectAccount: {
-        page: "/",
+        page: "/select-account",
         shouldRedirect: async () => {
           return true;
         },
