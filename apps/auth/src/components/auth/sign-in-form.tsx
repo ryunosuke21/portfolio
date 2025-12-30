@@ -4,7 +4,7 @@ import type React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Info, Mail } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -52,6 +52,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export function SignInForm({ className, ...props }: LoginFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -82,7 +83,8 @@ export function SignInForm({ className, ...props }: LoginFormProps) {
         },
         onSuccess: (ctx) => {
           if (ctx.data.twoFactorRedirect) {
-            router.push("/verify");
+            const verifyHref = `/verify${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+            router.push(verifyHref);
           }
         },
       },
@@ -173,7 +175,7 @@ export function SignInForm({ className, ...props }: LoginFormProps) {
                   <FieldLabel htmlFor="rememberMe">Remember me</FieldLabel>
                 </Field>
                 <Link
-                  href="/forgot-password"
+                  href={`/forgot-password${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
                   className="text-primary text-sm underline visited:text-primary/80 hover:no-underline"
                 >
                   Forgot password?
@@ -195,7 +197,7 @@ export function SignInForm({ className, ...props }: LoginFormProps) {
           <p className="text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
-              href="/sign-up"
+              href={`/sign-up${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
               className="text-primary text-sm underline visited:text-primary/80 hover:no-underline"
             >
               Register now.

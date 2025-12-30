@@ -1,5 +1,8 @@
+"use client";
+
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@portfolio/ui/components/button";
 import {
@@ -13,6 +16,9 @@ import {
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
 
 export default function ForgotPasswordPage() {
+  const searchParams = useSearchParams();
+  const signInHref = `/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+
   return (
     <div className="grid h-dvh w-dvw place-items-center">
       <Card className="w-full max-w-lg">
@@ -25,7 +31,7 @@ export default function ForgotPasswordPage() {
         <CardContent className="space-y-4">
           <ForgotPasswordForm className="w-full max-w-lg" />
           <Button asChild variant="ghost" className="w-full">
-            <Link href="/sign-in">
+            <Link href={signInHref}>
               <Undo2 />
               <span>Back to sign in</span>
             </Link>

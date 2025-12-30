@@ -4,7 +4,7 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Info, Send } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -54,6 +54,7 @@ export function ForgotPasswordForm({
   ...props
 }: ForgotPasswordFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [success, setSuccess] = React.useState(false);
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -106,11 +107,12 @@ export function ForgotPasswordForm({
               <DialogClose asChild>
                 <Button asChild className="w-full">
                   <Link
-                    href="/sign-in"
+                    href={`/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
                     onClick={(e) => {
                       e.preventDefault();
                       router.back();
-                      setTimeout(() => router.push("/sign-in"), 0);
+                      const signInHref = `/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+                      setTimeout(() => router.push(signInHref), 0);
                     }}
                   >
                     Back to sign in

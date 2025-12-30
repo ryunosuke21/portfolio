@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@portfolio/ui/components/button";
 import {
@@ -12,6 +15,9 @@ import {
 import { TwoFactorForm } from "@/components/auth/2fa-totp-form";
 
 export default function ForgotPasswordPage() {
+  const searchParams = useSearchParams();
+  const verifyAltHref = `/verify/alt${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+
   return (
     <div className="grid h-dvh w-dvw place-items-center">
       <Card className="w-full max-w-lg">
@@ -24,7 +30,7 @@ export default function ForgotPasswordPage() {
           <p className="text-muted-foreground text-xs">
             Can&apos;t access your authenticator app?{" "}
             <Button variant="link" className="mt-1 h-auto p-0 text-xs" asChild>
-              <Link href="/verify/alt">Try another way</Link>
+              <Link href={verifyAltHref}>Try another way</Link>
             </Button>
           </p>
         </CardHeader>

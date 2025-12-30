@@ -4,7 +4,7 @@ import type React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Info, Mail } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -48,6 +48,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export function SignUpForm({ className, ...props }: LoginFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -221,7 +222,7 @@ export function SignUpForm({ className, ...props }: LoginFormProps) {
                   <p>
                     I agree to the{" "}
                     <Link
-                      href="/terms"
+                      href={`/terms${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
                       className="text-primary underline visited:text-primary/80 hover:no-underline"
                     >
                       Terms & Conditions
@@ -251,7 +252,7 @@ export function SignUpForm({ className, ...props }: LoginFormProps) {
         <p className="text-muted-foreground">
           Already have an account?{" "}
           <Link
-            href="/sign-in"
+            href={`/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
             className="text-primary text-sm underline visited:text-primary/80 hover:no-underline"
           >
             Sign in

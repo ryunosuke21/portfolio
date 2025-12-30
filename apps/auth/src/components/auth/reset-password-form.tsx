@@ -68,7 +68,8 @@ export function ResetPasswordForm({
         },
         onSuccess: () => {
           toast.success("Password reset successfully");
-          router.push("/sign-in");
+          const signInHref = `/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+          router.push(signInHref);
         },
       },
     );
