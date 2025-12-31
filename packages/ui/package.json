@@ -18,6 +18,7 @@
     "./hooks/*": "./src/hooks/*.ts"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.10",
     "@portfolio/config": "workspace:*",
     "@tailwindcss/postcss": "catalog:",
     "@types/react": "catalog:",

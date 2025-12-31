@@ -1,43 +1,22 @@
-"use client";
+import { Suspense } from "react";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { VerifyClient } from "./verify-client";
 
-import { Button } from "@portfolio/ui/components/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@portfolio/ui/components/card";
-
-import { TwoFactorForm } from "@/components/auth/2fa-totp-form";
-
-export default function ForgotPasswordPage() {
-  const searchParams = useSearchParams();
-  const verifyAltHref = `/verify/alt${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
-
+export default function VerifyPage() {
   return (
-    <div className="grid h-dvh w-dvw place-items-center">
-      <Card className="w-full max-w-lg">
-        <CardHeader className="text-center!">
-          <CardTitle>Verify Account</CardTitle>
-          <CardDescription>
-            Enter the 6-digit code from your authenticator app to verify your
-            account.
-          </CardDescription>
-          <p className="text-muted-foreground text-xs">
-            Can&apos;t access your authenticator app?{" "}
-            <Button variant="link" className="mt-1 h-auto p-0 text-xs" asChild>
-              <Link href={verifyAltHref}>Try another way</Link>
-            </Button>
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <TwoFactorForm className="w-full max-w-lg" />
-        </CardContent>
-      </Card>
-    </div>
+    <Suspense fallback={
+      <div className="grid h-dvh w-dvw place-items-center">
+        <div className="w-full max-w-lg animate-pulse rounded-lg border bg-card p-6">
+          <div className="mb-4 h-6 w-32 rounded bg-muted" />
+          <div className="mb-6 h-4 w-48 rounded bg-muted" />
+          <div className="space-y-4">
+            <div className="h-10 w-full rounded bg-muted" />
+            <div className="h-10 w-full rounded bg-muted" />
+          </div>
+        </div>
+      </div>
+    }>
+      <VerifyClient />
+    </Suspense>
   );
 }

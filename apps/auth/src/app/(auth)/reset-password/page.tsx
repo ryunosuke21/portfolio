@@ -1,43 +1,25 @@
-"use client";
+import { Suspense } from "react";
 
-import { Undo2 } from "lucide-react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { ResetPasswordClient } from "./reset-password-client";
 
-import { Button } from "@portfolio/ui/components/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@portfolio/ui/components/card";
-
-import { ResetPasswordForm } from "@/components/auth/reset-password-form";
-
-export default function ForgotPasswordPage() {
-  const searchParams = useSearchParams();
-  const signInHref = `/sign-in${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
-
+export default function ResetPasswordPage() {
   return (
-    <div className="grid h-dvh w-dvw place-items-center">
-      <Card className="w-full max-w-lg">
-        <CardHeader className="text-center!">
-          <CardTitle>Forgot Password</CardTitle>
-          <CardDescription>
-            Enter your email to reset your password.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ResetPasswordForm className="w-full max-w-lg" />
-          <Button asChild variant="ghost" className="w-full">
-            <Link href={signInHref}>
-              <Undo2 />
-              <span>Back to sign in</span>
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+    <Suspense
+      fallback={
+        <div className="grid h-dvh w-dvw place-items-center">
+          <div className="w-full max-w-lg animate-pulse rounded-lg border bg-card p-6">
+            <div className="mb-4 h-6 w-32 rounded bg-muted" />
+            <div className="mb-6 h-4 w-48 rounded bg-muted" />
+            <div className="space-y-4">
+              <div className="h-10 w-full rounded bg-muted" />
+              <div className="h-10 w-full rounded bg-muted" />
+              <div className="h-10 w-full rounded bg-muted" />
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <ResetPasswordClient />
+    </Suspense>
   );
 }

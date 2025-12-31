@@ -2,15 +2,8 @@ import type React from "react";
 
 export default function AuthLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
-  return (
-    <div>
-      {children}
-      {modal}
-    </div>
-  );
+  return <div>{children}</div>;
 }

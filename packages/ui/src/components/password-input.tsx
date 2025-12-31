@@ -46,7 +46,6 @@ export function PasswordInput({
   const currentValue = value ?? password;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // @ts-expect-error - e.target.value is not typed
     setPassword(e.target.value);
     onChange?.(e);
   };
