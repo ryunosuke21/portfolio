@@ -4,7 +4,7 @@ import type React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Info, Mail } from "lucide-react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -28,7 +28,7 @@ import { PasswordInput } from "@portfolio/ui/components/password-input";
 import { Separator } from "@portfolio/ui/components/separator";
 import { cn } from "@portfolio/ui/lib/utils";
 
-import { signUp } from "@/hooks/auth";
+import { oauth2, signUp } from "@/hooks/auth";
 
 import { GithubLogin } from "./github";
 
@@ -47,7 +47,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function SignUpForm({ className, ...props }: LoginFormProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -87,9 +86,9 @@ export function SignUpForm({ className, ...props }: LoginFormProps) {
             });
           }
         },
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success("Account created successfully");
-          router.push("/dashboard");
+          await oauth2.continue({ created: true });
         },
       },
     );
