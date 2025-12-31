@@ -2,7 +2,6 @@
 
 import React from "react";
 import { GitHubDark } from "@ridemountainpig/svgl-react";
-import { useTheme } from "next-themes";
 import { toast } from "sonner";
 
 import { Button } from "@portfolio/ui/components/button";
@@ -19,7 +18,6 @@ export function GithubLogin({
   ...props
 }: GithubLoginProps) {
   const [loading, setLoading] = React.useState(false);
-  const { resolvedTheme } = useTheme();
 
   async function loginWithGithub() {
     setLoading(true);
