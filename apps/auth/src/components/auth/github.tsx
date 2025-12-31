@@ -25,7 +25,6 @@ export function GithubLogin({
     setLoading(true);
     const result = await signIn.social({
       provider: "github",
-      callbackURL: "/dashboard",
     });
 
     setLoading(false);
