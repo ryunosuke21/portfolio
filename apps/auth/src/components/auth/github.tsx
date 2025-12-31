@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { GitHubDark, GitHubLight } from "@ridemountainpig/svgl-react";
+import { GitHubDark } from "@ridemountainpig/svgl-react";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 
@@ -44,13 +44,13 @@ export function GithubLogin({
   return (
     <Button
       variant={variant}
-      className={cn(className)}
+      className={cn("bg-black/80", className)}
       onClick={handleGithubLogin}
       {...props}
     >
       <LoadingSwap isLoading={loading} className="flex items-center gap-2">
-        {resolvedTheme === "dark" ? <GitHubLight /> : <GitHubDark />}
-        Continue with Github
+        <GitHubDark />
+        <span>Continue with Github</span>
       </LoadingSwap>
     </Button>
   );
