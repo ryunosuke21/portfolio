@@ -16,7 +16,7 @@ import { ac, admin as adminRole, user as userRole } from "@/server/auth/access";
 import { db } from "@/server/db";
 
 export const auth = betterAuth({
-  baseURL: env.VERCEL_URL ?? "http://localhost:3000",
+  baseURL: env.BASE_URL,
   database: drizzleAdapter(db, {
     provider: "pg",
     camelCase: false,
