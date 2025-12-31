@@ -1,5 +1,14 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default function Home() {
-  redirect("/account");
+import { auth } from "@/server/auth";
+
+export default async function Home() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (session) {
+    redirect("/account");
+  } else {
+    redirect("/sign-in");
+  }
 }
