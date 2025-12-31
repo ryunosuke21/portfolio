@@ -1,0 +1,671 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Bell,
+  CreditCard,
+  Download,
+  Eye,
+  EyeOff,
+  Lock,
+  Mail,
+  Save,
+  Shield,
+  Smartphone,
+  Trash2,
+  Upload,
+} from "lucide-react";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@portfolio/ui/components/avatar";
+import { Badge } from "@portfolio/ui/components/badge";
+import { Button } from "@portfolio/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@portfolio/ui/components/card";
+import { Input } from "@portfolio/ui/components/input";
+import { Label } from "@portfolio/ui/components/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@portfolio/ui/components/select";
+import { Switch } from "@portfolio/ui/components/switch";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@portfolio/ui/components/tabs";
+import { Textarea } from "@portfolio/ui/components/textarea";
+
+export default function SettingsPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [notifications, setNotifications] = useState({
+    email: true,
+    push: false,
+    sms: false,
+    workflowSuccess: true,
+    workflowFailure: true,
+    weeklyReport: true,
+    securityAlerts: true,
+  });
+
+  const handleNotificationChange = (key: string, value: boolean) => {
+    setNotifications((prev) => ({ ...prev, [key]: value }));
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-semibold text-2xl text-foreground">Settings</h1>
+          <p className="mt-1 text-muted-foreground">
+            Manage your account preferences and configuration
+          </p>
+        </div>
+      </div>
+
+      <Tabs defaultValue="profile" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="billing">Billing</TabsTrigger>
+          <TabsTrigger value="preferences">Preferences</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="profile" className="space-y-6">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle>Profile Information</CardTitle>
+              <CardDescription>
+                Update your personal information and profile settings
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="flex items-center gap-6">
+                <Avatar className="h-20 w-20">
+                  <AvatarImage src="/placeholder.svg?height=80&width=80" />
+                  <AvatarFallback className="text-lg">AE</AvatarFallback>
+                </Avatar>
+                <div className="space-y-2">
+                  <Button variant="outline" className="gap-2 bg-transparent">
+                    <Upload className="h-4 w-4" />
+                    Upload Photo
+                  </Button>
+                  <p className="text-muted-foreground text-sm">
+                    JPG, PNG or GIF. Max size 2MB.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input id="firstName" defaultValue="Alex" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input id="lastName" defaultValue="Evans" />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Email Address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  defaultValue="alex@company.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="bio">Bio</Label>
+                <Textarea
+                  id="bio"
+                  placeholder="Tell us about yourself..."
+                  defaultValue="Product manager passionate about automation and workflow optimization."
+                  rows={3}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="timezone">Timezone</Label>
+                <Select defaultValue="pst">
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pst">
+                      Pacific Standard Time (PST)
+                    </SelectItem>
+                    <SelectItem value="est">
+                      Eastern Standard Time (EST)
+                    </SelectItem>
+                    <SelectItem value="cst">
+                      Central Standard Time (CST)
+                    </SelectItem>
+                    <SelectItem value="mst">
+                      Mountain Standard Time (MST)
+                    </SelectItem>
+                    <SelectItem value="utc">
+                      Coordinated Universal Time (UTC)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex justify-end">
+                <Button className="gap-2 bg-primary hover:bg-primary/90">
+                  <Save className="h-4 w-4" />
+                  Save Changes
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="notifications" className="space-y-6">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle>Notification Preferences</CardTitle>
+              <CardDescription>
+                Choose how you want to be notified about important events
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">
+                  Notification Channels
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Mail className="h-5 w-5 text-muted-foreground" />
+                      <div>
+                        <div className="font-medium">Email Notifications</div>
+                        <div className="text-muted-foreground text-sm">
+                          Receive notifications via email
+                        </div>
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.email}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("email", value)
+                      }
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Bell className="h-5 w-5 text-muted-foreground" />
+                      <div>
+                        <div className="font-medium">Push Notifications</div>
+                        <div className="text-muted-foreground text-sm">
+                          Receive browser push notifications
+                        </div>
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.push}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("push", value)
+                      }
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Smartphone className="h-5 w-5 text-muted-foreground" />
+                      <div>
+                        <div className="font-medium">SMS Notifications</div>
+                        <div className="text-muted-foreground text-sm">
+                          Receive text message alerts
+                        </div>
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.sms}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("sms", value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">
+                  Event Notifications
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">Workflow Success</div>
+                      <div className="text-muted-foreground text-sm">
+                        When workflows complete successfully
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.workflowSuccess}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("workflowSuccess", value)
+                      }
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">Workflow Failure</div>
+                      <div className="text-muted-foreground text-sm">
+                        When workflows fail or encounter errors
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.workflowFailure}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("workflowFailure", value)
+                      }
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">Weekly Reports</div>
+                      <div className="text-muted-foreground text-sm">
+                        Weekly summary of workflow performance
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.weeklyReport}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("weeklyReport", value)
+                      }
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">Security Alerts</div>
+                      <div className="text-muted-foreground text-sm">
+                        Important security and account notifications
+                      </div>
+                    </div>
+                    <Switch
+                      checked={notifications.securityAlerts}
+                      onCheckedChange={(value) =>
+                        handleNotificationChange("securityAlerts", value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Button className="gap-2 bg-primary hover:bg-primary/90">
+                  <Save className="h-4 w-4" />
+                  Save Preferences
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="security" className="space-y-6">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle>Security Settings</CardTitle>
+              <CardDescription>
+                Manage your account security and authentication
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Password</h3>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="currentPassword">Current Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="currentPassword"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter current password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-1/2 right-2 h-8 w-8 -translate-y-1/2 transform"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="newPassword">New Password</Label>
+                    <Input
+                      id="newPassword"
+                      type="password"
+                      placeholder="Enter new password"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">
+                      Confirm New Password
+                    </Label>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      placeholder="Confirm new password"
+                    />
+                  </div>
+
+                  <Button variant="outline" className="gap-2 bg-transparent">
+                    <Lock className="h-4 w-4" />
+                    Update Password
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">
+                  Two-Factor Authentication
+                </h3>
+                <div className="flex items-center justify-between rounded-lg border border-border p-4">
+                  <div>
+                    <div className="font-medium">Authenticator App</div>
+                    <div className="text-muted-foreground text-sm">
+                      Use an authenticator app for additional security
+                    </div>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-destructive/10 text-destructive"
+                  >
+                    Disabled
+                  </Badge>
+                </div>
+                <Button variant="outline" className="gap-2 bg-transparent">
+                  <Shield className="h-4 w-4" />
+                  Enable 2FA
+                </Button>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Active Sessions</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between rounded-lg border border-border p-4">
+                    <div>
+                      <div className="font-medium">Current Session</div>
+                      <div className="text-muted-foreground text-sm">
+                        Chrome on macOS • San Francisco, CA
+                      </div>
+                      <div className="text-muted-foreground/70 text-xs">
+                        Last active: Now
+                      </div>
+                    </div>
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary"
+                    >
+                      Current
+                    </Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between rounded-lg border border-border p-4">
+                    <div>
+                      <div className="font-medium">Mobile App</div>
+                      <div className="text-muted-foreground text-sm">
+                        iPhone • San Francisco, CA
+                      </div>
+                      <div className="text-muted-foreground/70 text-xs">
+                        Last active: 2 hours ago
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      Revoke
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="billing" className="space-y-6">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle>Billing & Subscription</CardTitle>
+              <CardDescription>
+                Manage your subscription and billing information
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Current Plan</h3>
+                <div className="rounded-lg border border-border p-4">
+                  <div className="mb-2 flex items-center justify-between">
+                    <div className="font-medium text-lg">Pro Plan</div>
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary"
+                    >
+                      Active
+                    </Badge>
+                  </div>
+                  <div className="mb-4 text-muted-foreground text-sm">
+                    $29/month • Billed monthly • Next billing: Jan 15, 2025
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      Change Plan
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      Cancel Subscription
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Payment Method</h3>
+                <div className="rounded-lg border border-border p-4">
+                  <div className="mb-2 flex items-center gap-3">
+                    <CreditCard className="h-5 w-5 text-muted-foreground" />
+                    <div className="font-medium">•••• •••• •••• 4242</div>
+                    <Badge variant="secondary">Default</Badge>
+                  </div>
+                  <div className="mb-4 text-muted-foreground text-sm">
+                    Expires 12/2027
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      Update Card
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      Add Payment Method
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Billing History</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between rounded-lg border border-border p-3">
+                    <div>
+                      <div className="font-medium">Dec 15, 2024</div>
+                      <div className="text-muted-foreground text-sm">
+                        Pro Plan - Monthly
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">$29.00</span>
+                      <Button variant="ghost" size="sm">
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between rounded-lg border border-border p-3">
+                    <div>
+                      <div className="font-medium">Nov 15, 2024</div>
+                      <div className="text-muted-foreground text-sm">
+                        Pro Plan - Monthly
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">$29.00</span>
+                      <Button variant="ghost" size="sm">
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="preferences" className="space-y-6">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle>Application Preferences</CardTitle>
+              <CardDescription>
+                Customize your application experience
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Appearance</h3>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="theme">Theme</Label>
+                    <Select defaultValue="light">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="light">Light</SelectItem>
+                        <SelectItem value="dark">Dark</SelectItem>
+                        <SelectItem value="system">System</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="language">Language</Label>
+                    <Select defaultValue="en">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="en">English</SelectItem>
+                        <SelectItem value="es">Spanish</SelectItem>
+                        <SelectItem value="fr">French</SelectItem>
+                        <SelectItem value="de">German</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Data & Privacy</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">Analytics & Usage Data</div>
+                      <div className="text-muted-foreground text-sm">
+                        Help improve our product by sharing usage data
+                      </div>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">
+                        Marketing Communications
+                      </div>
+                      <div className="text-muted-foreground text-sm">
+                        Receive product updates and marketing emails
+                      </div>
+                    </div>
+                    <Switch />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-foreground">Data Export</h3>
+                <div className="space-y-4">
+                  <p className="text-muted-foreground text-sm">
+                    Export your data including workflows, logs, and account
+                    information.
+                  </p>
+                  <Button variant="outline" className="gap-2 bg-transparent">
+                    <Download className="h-4 w-4" />
+                    Export Data
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-medium text-destructive">Danger Zone</h3>
+                <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4">
+                  <div className="space-y-4">
+                    <div>
+                      <div className="font-medium text-destructive">
+                        Delete Account
+                      </div>
+                      <div className="text-destructive/80 text-sm">
+                        Permanently delete your account and all associated data.
+                        This action cannot be undone.
+                      </div>
+                    </div>
+                    <Button variant="destructive" className="gap-2">
+                      <Trash2 className="h-4 w-4" />
+                      Delete Account
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Button className="gap-2 bg-primary hover:bg-primary/90">
+                  <Save className="h-4 w-4" />
+                  Save Preferences
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
