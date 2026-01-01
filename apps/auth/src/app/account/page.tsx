@@ -2,11 +2,13 @@ import {
   ActivityIcon,
   Eye,
   Grid3x3,
+  LayoutDashboard,
   Settings as SettingsIcon,
   Shield,
   User,
   User2,
 } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import {
@@ -14,6 +16,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@portfolio/ui/components/avatar";
+import { Button } from "@portfolio/ui/components/button";
 import {
   Tabs,
   TabsContent,
@@ -40,7 +43,7 @@ export default async function MyAccountPage() {
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
               <AvatarImage
@@ -59,6 +62,16 @@ export default async function MyAccountPage() {
                 Manage your identity and security settings
               </p>
             </div>
+          </div>
+          <div>
+            {session.user.role === "admin" && (
+              <Button variant="secondary" asChild>
+                <Link href="/dashboard">
+                  <LayoutDashboard className="h-4 w-4" />
+                  <span className="hidden sm:inline">Admin Panel</span>
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
 
