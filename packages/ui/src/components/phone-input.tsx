@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import isoCountries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
 import {
   AsYouType,
   type CountryCode,
@@ -31,16 +33,32 @@ import {
 import { ScrollArea } from "@portfolio/ui/components/scroll-area";
 import { cn } from "@portfolio/ui/lib/utils";
 
-type Country = ConstructorParameters<typeof AsYouType>[0]; // e.g. "US", "GB"
+// Register locale once at module level
+isoCountries.registerLocale(enLocale);
+
+function getCountryName(countryCode: CountryCode): string {
+  return isoCountries.getName(countryCode, "en") || countryCode;
+}
 type PhoneInputProps = Omit<React.ComponentProps<"input">, "type"> & {
   defaultCountry?: CountryCode;
+  showCountry?: boolean;
 };
 
-export function PhoneInput({ className, ...props }: PhoneInputProps) {
+export function PhoneInput({
+  className,
+  defaultCountry,
+  showCountry = true,
+  ...props
+}: PhoneInputProps) {
   const [value, setValue] = React.useState("");
-  const country: CountryCode = "US";
+  const [selectedCountry, setSelectedCountry] = React.useState<
+    CountryCode | undefined
+  >(defaultCountry);
 
-  const formatter = React.useMemo(() => new AsYouType(country), []);
+  const formatter = React.useMemo(
+    () => new AsYouType(selectedCountry),
+    [selectedCountry],
+  );
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     formatter.reset();
@@ -54,21 +72,49 @@ export function PhoneInput({ className, ...props }: PhoneInputProps) {
     }
 
     const formattedValue = formatter.input(val);
-    if (val.startsWith("+")) {
-      const matchCountry = formatter.getCountry();
-      if (matchCountry) {
-        // TODO Update the selected country
+    let nextValue = formattedValue;
+    const matchCountry = formatter.getCountry();
+    const displayCountry = matchCountry ?? selectedCountry;
+    if (matchCountry && matchCountry !== selectedCountry) {
+      setSelectedCountry(matchCountry);
+    }
+    if (displayCountry) {
+      const callingCode = getCountryCallingCode(displayCountry);
+      if (formattedValue.startsWith(`+${callingCode}`)) {
+        nextValue = formattedValue.replace(
+          new RegExp(`^\\+${callingCode}\\s*`),
+          "",
+        );
       }
     }
-    setValue(formattedValue);
+    setValue(nextValue);
+  }
+
+  function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+    props?.onBlur?.(event);
   }
 
   return (
     <InputGroup className={cn(className)}>
-      <InputGroupInput {...props} value={value} onChange={handleChange} />
-      <InputGroupAddon>
-        <PhoneInputCountrySelect />
-      </InputGroupAddon>
+      <InputGroupInput
+        {...props}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      {showCountry && (
+        <InputGroupAddon>
+          <PhoneInputCountrySelect
+            className="rounded-r-none border-r"
+            value={selectedCountry}
+            onValueChange={(next) => {
+              if (next) {
+                setSelectedCountry(next);
+              }
+            }}
+          />
+        </InputGroupAddon>
+      )}
     </InputGroup>
   );
 }
@@ -111,7 +157,7 @@ export function PhoneInputCountrySelect({
   return (
     <Popover {...props}>
       <PopoverTrigger asChild>
-        <InputGroupButton>
+        <InputGroupButton className={cn(className)}>
           {selectedCountry !== undefined ? (
             <span>+ {getCountryCallingCode(selectedCountry)}</span>
           ) : (
@@ -129,20 +175,26 @@ export function PhoneInputCountrySelect({
             <ScrollArea viewportClassName="max-h-[200px]">
               <CommandEmpty>No country found</CommandEmpty>
               <CommandGroup>
-                {countries.map((country) => (
-                  <CommandItem
-                    key={country}
-                    value={country}
-                    onSelect={() => handleValueChange(country)}
-                    className="gap-2"
-                  >
-                    {selectedCountry === country && <Check />}
-                    <span className="text-foreground">{country}</span>
-                    <span className="text-muted-foreground">
-                      + {getCountryCallingCode(country)}
-                    </span>
-                  </CommandItem>
-                ))}
+                {countries.map((country) => {
+                  const countryName = getCountryName(country);
+                  const callingCode = getCountryCallingCode(country);
+                  // Include country code, name, and calling code in searchable value
+                  const searchValue = `${country} ${countryName} +${callingCode}`;
+                  return (
+                    <CommandItem
+                      key={country}
+                      value={searchValue}
+                      onSelect={() => handleValueChange(country)}
+                      className="gap-2"
+                    >
+                      {selectedCountry === country && <Check />}
+                      <span className="text-foreground">{country}</span>
+                      <span className="text-muted-foreground">
+                        + {callingCode}
+                      </span>
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
             </ScrollArea>
           </CommandList>
