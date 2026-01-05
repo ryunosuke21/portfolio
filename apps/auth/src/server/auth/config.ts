@@ -42,13 +42,14 @@ export const auth = betterAuth({
       allowDifferentEmails: true,
       trustedProviders: ["github"],
     },
-    updateAccountOnSignIn: false,
+    updateAccountOnSignIn: true,
   },
   socialProviders: {
     github: {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
       redirectURI: `${env.BASE_URL}/api/auth/callback/github`,
+      prompt: "select_account",
     },
   },
   plugins: [
