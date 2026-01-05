@@ -17,7 +17,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       >
         {children}
         <Analytics />
-        <Toaster richColors />
+        <Toaster />
       </ThemeProvider>
     </TRPCReactProvider>
   );
